@@ -18,8 +18,61 @@
 
 <h3>@ViewBag.EnteredMessage</h3>
 
+<div class="col-md-6 table-bordered">
+    <div id="ajForm">
+        @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "ajForm" })) {
+            <h3>Enter a Message</h3>
+            <textarea name="message" maxlength="150" data-bind="value:message,valueUpdate:'input'"></textarea>
+            <input type="submit" value="MS Ajax Send" />
+            <span data-bind="text:charactersRemaining" />
+        }
+    </div>
+</div>
 
-<form method="post">
-    <textarea name="message"></textarea>
-    <input type="submit" />
-</form>
+<div class="col-md-6 table-bordered">
+    <div id="djsFormRec">
+        I'll get replaced when you send the js form :(
+    </div>
+
+    <form method="post" id="jsForm">
+        <textarea name="message" id="taJSForm" maxlength="150" data-bind="value:message,valueUpdate:'input'"></textarea>
+        <input type="submit" value="JS Ajax Send" />
+        <span data-bind="text:charactersRemaining"/>
+    </form>
+</div>
+
+@section scripts{
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+
+    <script>
+        function ContactViewModel() {
+            var self = this;
+            self.message = ko.observable('');
+            self.charactersRemaining = ko.computed(function () {
+                return 150 - self.message().length;
+            });
+        }
+        ko.applyBindings(new ContactViewModel());
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#jsForm').submit(function () {
+                var form = $(this);
+                $.ajax({
+                    type: "POST",
+                    url: '', //submits to the same URL it's on
+                    data: { message: $('#taJSForm').val() },
+                    success: function (data) {
+                        var bs = data;
+                        $('#djsFormRec').html(data);
+                    }
+                });
+                return false; // stops the default syncronousnes
+            });
+        });
+    </script>
+    
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+}
