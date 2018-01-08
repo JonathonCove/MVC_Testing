@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Constants
+namespace Managers.Models
 {
-    public class Constants
+    public partial class AuthSession
     {
     }
 }

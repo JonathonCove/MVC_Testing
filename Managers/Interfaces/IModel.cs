@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Constants
+namespace Managers.Interfaces
 {
-    public class Constants
+    public interface IModel
     {
+        int ID { get; set; }
     }
 }
