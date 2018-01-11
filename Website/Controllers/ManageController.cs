@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using AutomatedTeller.Models;
+using Scarecrow.Models;
 
-namespace AutomatedTeller.Controllers
+namespace Scarecrow.Controllers
 {
     [Authorize]
     public class ManageController : Controller

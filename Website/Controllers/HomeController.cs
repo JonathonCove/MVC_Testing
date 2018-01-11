@@ -1,11 +1,12 @@
-﻿using AutomatedTeller.CustomAttributes;
+﻿using Constants;
+using Scarecrow.CustomAttributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace AutomatedTeller.Controllers
+namespace Scarecrow.Controllers
 {
     [MyLoggingFilter]
     public class HomeController : Controller
@@ -16,7 +17,7 @@ namespace AutomatedTeller.Controllers
 
         public ActionResult About() {
             ViewBag.Message = "Your application description page.";
-
+           var smth = Constants.Constants.WebsiteName;
             return View();
         }
 

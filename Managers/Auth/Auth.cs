@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using Utils.Time;
 using System.Security.Cryptography;
-using Managers.Context;
 using Managers.Models;
 
 namespace DataManager.Auth
@@ -28,7 +27,7 @@ namespace DataManager.Auth
             if (HttpContext.Current.Request.Cookies[CookieID] != null)
             {
                 cookie = HttpContext.Current.Request.Cookies[CookieID];
-                cookie.Expires = UKTime.Now.AddHours(1);
+                cookie.Expires = UKTime.Now.AddHours(48);
             }
 
             return cookie;
@@ -56,10 +55,6 @@ namespace DataManager.Auth
             else if (userType == CookieAuthTypes.User)
             {
                 session.UserID = recordID;
-            } else if (userType == CookieAuthTypes.TrainingAdmin) {
-                session.TrainingAdminID = recordID;
-            } else if (userType == CookieAuthTypes.Employee) {
-                session.EmployeeID = recordID;
             }
 
 
@@ -96,10 +91,6 @@ namespace DataManager.Auth
                                 recordID = authSession.AdminID.Value;
                             if (userType == CookieAuthTypes.User && authSession.UserID.HasValue)
                                 recordID = authSession.UserID.Value;
-                            if (userType == CookieAuthTypes.TrainingAdmin && authSession.TrainingAdminID.HasValue)
-                                recordID = authSession.TrainingAdminID.Value;
-                            if (userType == CookieAuthTypes.Employee && authSession.EmployeeID.HasValue)
-                                recordID = authSession.EmployeeID.Value;
                         }
                     }
                 }

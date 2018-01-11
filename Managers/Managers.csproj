@@ -44,16 +44,13 @@
   <ItemGroup>
     <Compile Include="Abstracts\ADataManager.cs" />
     <Compile Include="Auth\Auth.cs" />
+    <Compile Include="Auth\AuthUser.cs" />
     <Compile Include="Auth\AuthAdmin.cs" />
-    <Compile Include="Context\Main.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Main.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Interfaces\IModel.cs" />
     <Compile Include="Interfaces\ITemporal.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\AuthSession.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,19 +60,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Context\Main.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Main.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Context\Main.dbml.layout">
-      <DependentUpon>Main.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

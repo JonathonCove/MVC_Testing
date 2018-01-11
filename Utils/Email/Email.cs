@@ -7,6 +7,7 @@ using System.IO;
 using System.Net.Mail;
 using System.Web.Configuration;
 using System.Configuration;
+using Constants;
 
 namespace Utils.Email
 {
@@ -270,7 +271,7 @@ namespace Utils.Email
             try
             {
                 Utils.Files.Files.CheckDirectory(Constants.EmailLogPath);
-                string filePath = Files.Files.MapPath(Constants.EmailLogPath + timeStamp + ".html");
+                string filePath = File.Files.MapPath(Constants.EmailLogPath + timeStamp + ".html");
 
                 FileStream fs = File.Open(filePath, FileMode.CreateNew, FileAccess.Write);
 

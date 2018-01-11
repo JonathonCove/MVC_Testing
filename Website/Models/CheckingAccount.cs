@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace AutomatedTeller.Models
+namespace Scarecrow.Models
 {
     public class CheckingAccount
     {

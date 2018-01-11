@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(AutomatedTeller.Startup))]
-namespace AutomatedTeller
+[assembly: OwinStartupAttribute(typeof(Scarecrow.Startup))]
+namespace Scarecrow
 {
     public partial class Startup
     {

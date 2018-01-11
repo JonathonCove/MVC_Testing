@@ -50,6 +50,12 @@
     <Compile Include="Time\UKTime.cs" />
     <Compile Include="Web\HttpRequest.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Constants\Constants.csproj">
+      <Project>{EA99CFB8-261D-4F3F-9EDB-5834C657DF6A}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 
-namespace AutomatedTeller.Controllers
+namespace Scarecrow.Controllers
 {
     public class TransactionController : Controller
     {

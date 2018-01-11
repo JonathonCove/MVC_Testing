@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace AutomatedTeller.Controllers
+namespace Scarecrow.Controllers
 {
     public class OtherController : Controller
     {

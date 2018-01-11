@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace AutomatedTeller.CustomAttributes
+namespace Scarecrow.CustomAttributes
 {
     public class MyLoggingFilterAttribute : ActionFilterAttribute
     {

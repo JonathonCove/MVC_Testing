@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace AutomatedTeller.Models
+namespace Scarecrow.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
