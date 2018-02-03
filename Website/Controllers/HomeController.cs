@@ -1,4 +1,5 @@
 ﻿using Constants;
+using Managers.Context;
 using Scarecrow.CustomAttributes;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Scarecrow.Controllers
     public class HomeController : Controller
     {
         public ActionResult Index() {
+
             return View();
         }
 

@@ -19,6 +19,7 @@ namespace Managers.Models
         public string EmailAddress { get; set; }
         public string SecurityStamp { get; set; }
         public int AccessFailedCount { get; set; }
+        public string EmailVerifyHash { get; set; }
         public bool EmailVerified { get; set; }
         public DateTime DateJoined { get; set; }
         public DateTime? LastLogin { get; set; }

@@ -32,6 +32,8 @@ namespace Managers.Managers
             AuthUser au = new AuthUser(db);
             string passHash = au.GetHashedString(password);
 
+            string verifyhash = Utils.Encryption.Encryption.HashString(username);
+
             User newUser = new User()
             {
                 Username = username,
@@ -41,6 +43,7 @@ namespace Managers.Managers
                 SecurityStamp = "",
                 AccessFailedCount = 0,
                 EmailVerified = false,
+                EmailVerifyHash = verifyhash,
                 LastLogin = null
             };
 

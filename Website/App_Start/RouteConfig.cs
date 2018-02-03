@@ -15,6 +15,9 @@ namespace Scarecrow
             //User
             routes.MapRoute(null, "signup", new { controller="User", action="Signup" });
             routes.MapRoute(null, "login", new { controller="User", action="Login" });
+            routes.MapRoute(null, "verify-email/{hash}", new { controller="User", action= "VerfyEmail" });
+
+            //routes.MapRoute(null, "user/{action}", new { controller="User" });
 
             routes.MapRoute(
                 name: "Default",

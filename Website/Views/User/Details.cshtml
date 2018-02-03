@@ -1,10 +1,10 @@
-﻿@model Managers.Models.User
-
+﻿
 @{
     ViewBag.Title = "Details";
+    Managers.Models.User user = (Managers.Models.User)ViewBag.User;
 }
 
-<h2>@Model.FullName's Details</h2>
+<h2>Your Details</h2>
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -13,16 +13,21 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Username)
+                Username
             </dt>
-
             <dd>
-                @Html.DisplayFor(model => model.EmailAddress)
+                @user.Username
             </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.DateJoined)
-            </dt>
+            <dt>Email Address</dt>
+            <dd>
+                @user.EmailAddress
+            </dd>
+
+            <dt>Date Joined</dt>
+            <dd>
+                @user.DateJoined.ToString("dd/MM/yyyy")
+            </dd>
 
         </dl>
     </div>

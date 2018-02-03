@@ -147,7 +147,8 @@ namespace DataManager.Auth
         {
             try
             {
-                return db.Admins.SingleOrDefault(p => p.ID == GetRecordID(CookieAuthTypes.Admin));
+                int recid = GetRecordID(CookieAuthTypes.Admin);
+                return db.Admins.SingleOrDefault(p => p.ID == recid);
             }
             catch (InvalidCastException)
             {

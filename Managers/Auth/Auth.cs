@@ -84,8 +84,9 @@ namespace DataManager.Auth
                     if (!String.IsNullOrEmpty(cookie.Values["authcode"]))
                     {
                         string sessionCode = cookie.Values["authcode"].ToString();
+                        string ip = HttpContext.Current.Request.GetUserIPAddress();
                         AuthSession authSession = db.AuthSessions.SingleOrDefault(p => p.SessionCode == sessionCode && p.CookieID == CookieID
-                            && p.IPAddress == HttpContext.Current.Request.GetUserIPAddress());
+                            && p.IPAddress == ip);
 
                         if (authSession != null)
                         {

@@ -14,12 +14,20 @@
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 <li>@Html.ActionLink("About", "About", "Home")</li>
             </ul>
-          
+          @if (ViewBag.User != null)
+          {
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Log out", "Logout", "User", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+            </ul>
+          }
+          else
+          {
             <ul class="nav navbar-nav navbar-right">
                 <li>@Html.ActionLink("Signup", "Signup", "User", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
                 <li>@Html.ActionLink("Log in", "Login", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
             </ul>
-            
+          }
+
         </div>
     </div>
 </div>

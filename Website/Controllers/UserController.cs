@@ -15,6 +15,13 @@ namespace Scarecrow.Controllers
     public class UserController : Controller
     {
         MainDataContext db = new MainDataContext();
+        private const string ViewPath = "/Views/User/";
+
+        private bool SetLogin() {
+            AuthUser au = new AuthUser(db);
+            ViewBag.User = au.Authorise();
+            return ViewBag.User != null;
+        }
 
         // GET: CheckingAccount
         public ActionResult Index()
@@ -70,13 +77,15 @@ namespace Scarecrow.Controllers
 
         public ActionResult Login() { return View(); }
 
+        public ActionResult Details() { if (SetLogin()) { return View(); } else { return RedirectToAction("Index", "Home"); } }
+
         [HttpPost]
         public ActionResult Login(UserViewModels.Login model) {
             AuthUser aa = new AuthUser(db);
 
             bool success = aa.Login(model.EmailAddress, model.Password);
 
-            if (success) { return RedirectToAction("Feed"); }
+            if (success) { return RedirectToAction("Details", aa.Authorise()); }
             else {
                 ModelState.AddModelError("EmailAddress", "That email and password combination was not recognised");
                 return View();
@@ -84,8 +93,21 @@ namespace Scarecrow.Controllers
 
         }
 
-        public ActionResult VerfyEmail() {
-            return View();
+        public ActionResult VerfyEmail(string hash) {
+
+            UserManager userM = new UserManager(db);
+
+            Managers.Models.User user = userM.GetAllData().FirstOrDefault(u => u.EmailVerifyHash == hash);
+
+            if (user != null)
+            {
+                user.EmailVerified = true;
+                db.SaveChanges();
+
+                return View(ViewPath + "VerifyThanks.cshtml"); 
+            }
+            else { return RedirectToAction("Index", "Home", null); }
+
         }
 
         // GET: CheckingAccount/Edit/5

@@ -67,6 +67,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Constants\Constants.csproj">
+      <Project>{EA99CFB8-261D-4F3F-9EDB-5834C657DF6A}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{272B1093-AE7A-49D1-89F7-01B324C14D8B}</Project>
       <Name>Utils</Name>
