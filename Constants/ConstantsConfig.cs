@@ -9,7 +9,7 @@ namespace Constants
 {
     public class ConstantsConfig : ConfigurationSection
     {
-        [ConfigurationProperty("sendErrorEmails", DefaultValue = "", IsRequired = false)]
+        [ConfigurationProperty("sendErrorEmails", DefaultValue = true, IsRequired = false)]
         public bool SendErrorEmails {
             get {
                 return (bool)this["sendErrorEmails"];
@@ -69,7 +69,7 @@ namespace Constants
             }
         }
 
-        [ConfigurationProperty("TestMode", DefaultValue = "", IsRequired = false)]
+        [ConfigurationProperty("TestMode", DefaultValue = false, IsRequired = false)]
         public bool TestMode {
             get {
                 return (bool)this["TestMode"];
@@ -79,13 +79,39 @@ namespace Constants
             }
         }
 
-        [ConfigurationProperty("isRedirectAllMailToDev", DefaultValue = "", IsRequired = false)]
+        [ConfigurationProperty("isRedirectAllMailToDev", DefaultValue = false, IsRequired = false)]
         public bool RedirectAllMailToDev {
             get {
                 return (bool)this["isRedirectAllMailToDev"];
             }
             set {
                 this["isRedirectAllMailToDev"] = value;
+            }
+        }
+
+        [ConfigurationProperty("EmailLogPath", DefaultValue = "", IsRequired = false)]
+        public string EmailLogPath
+        {
+            get
+            {
+                return (string)this["EmailLogPath"];
+            }
+            set
+            {
+                this["EmailLogPath"] = value;
+            }
+        }
+
+        [ConfigurationProperty("EmailTemplatePath", DefaultValue = "", IsRequired = false)]
+        public string EmailTemplatePath
+        {
+            get
+            {
+                return (string)this["EmailTemplatePath"];
+            }
+            set
+            {
+                this["EmailTemplatePath"] = value;
             }
         }
     }

@@ -22,7 +22,7 @@ namespace DataManager.Auth
 
             string encryptedPassword = Utils.Encryption.PasswordHash.CreateHash(password);
 
-            Admin admin = db.Admins.SingleOrDefault(p => p.Email == email);
+            Admin admin = db.Admins.SingleOrDefault(p => p.EmailAddress == email);
 
             if (admin != null)
             {
@@ -32,7 +32,7 @@ namespace DataManager.Auth
                     result = true;
 
                     admin.LastLogin = UKTime.Now;
-                    db.SubmitChanges();
+                    db.SaveChanges();
                 }
             }
 
@@ -48,7 +48,7 @@ namespace DataManager.Auth
         {
             string resetKey = UKTime.Now.Ticks.ToString() + "~" + Guid.NewGuid();
             admin.SecurityStamp = resetKey;
-            db.SubmitChanges();
+            db.SaveChanges();
             return "/admin/login.aspx?reset=" + resetKey;
         }
 
@@ -120,7 +120,7 @@ namespace DataManager.Auth
             admin.AccessFailedCount = 0;
             admin.PasswordHash = pass;
 
-            db.SubmitChanges();
+            db.SaveChanges();
             return true;
         }
 
@@ -137,7 +137,7 @@ namespace DataManager.Auth
             {
                 string hashedNewPassword = GetHashedString(newPassword);
                 admin.PasswordHash = hashedNewPassword;
-                db.SubmitChanges();
+                db.SaveChanges();
             }
 
             return true;

@@ -7,7 +7,6 @@ using System.IO;
 using System.Net.Mail;
 using System.Web.Configuration;
 using System.Configuration;
-using Constants;
 
 namespace Utils.Email
 {
@@ -20,13 +19,13 @@ namespace Utils.Email
         public static bool SendTemplateEmail(string email, string subject, MailAddressCollection mailTo,
             MailAddressCollection mailCc, MailAddressCollection mailBcc, Dictionary<string, string> attachments)
         {
-            return SendTemplateEmail(email, subject, mailTo, mailCc, mailBcc, attachments, Constants.EmailsFrom);
+            return SendTemplateEmail(email, subject, mailTo, mailCc, mailBcc, attachments, Constants.Constants.EmailsFrom);
         }
 
         public static bool SendTemplateEmail(string email, string subject, MailAddressCollection mailTo,
             MailAddressCollection mailCc, MailAddressCollection mailBcc, Dictionary<string, string> attachments, MailPriority priority) {
             
-            return SendTemplateEmail(email, subject, mailTo, mailCc, mailBcc, attachments, Constants.EmailsFrom, priority);
+            return SendTemplateEmail(email, subject, mailTo, mailCc, mailBcc, attachments, Constants.Constants.EmailsFrom, priority);
         }
 
         /// <summary>
@@ -86,19 +85,19 @@ namespace Utils.Email
         public static bool SendTemplateEmail(string email, string subject, MailAddressCollection mailTo,
             MailAddressCollection mailCc, MailAddressCollection mailBcc, Dictionary<string, string> attachments, string emailFrom, MailPriority priority = MailPriority.Normal)
         {
-            StreamReader f = new StreamReader(Files.Files.MapPath(Constants.EmailTemplatePath + "template.html"));
+            StreamReader f = new StreamReader(Files.Files.MapPath(Constants.Constants.EmailTemplatePath + "template.html"));
             StringBuilder template = new StringBuilder(f.ReadToEnd());
             f.Close();
 
             StringBuilder body = new StringBuilder(email);
 
             MailMessage mm = new MailMessage();
-            if (Constants.IsRedirectAllMailToDev)
+            if (Constants.Constants.TestMode)
             {
                 mm.To.Clear();
                 mm.CC.Clear();
                 mm.Bcc.Clear();
-                mm.To.Add(Constants.DeveloperEmail);
+                mm.To.Add(Constants.Constants.DeveloperEmail);
             }
             else
             {
@@ -117,15 +116,15 @@ namespace Utils.Email
                     mm.Bcc.Add(item);
                 }
 
-                if (Constants.SendEmailsToDev)
+                if (Constants.Constants.TestMode)
                 {
-                    mm.Bcc.Add(Constants.DeveloperEmail);
+                    mm.Bcc.Add(Constants.Constants.DeveloperEmail);
                 }
             }
 
             foreach (KeyValuePair<string, string> att in attachments)
             {
-                if (Files.Files.IsFileExist(att.Key))
+                if (File.Exists(att.Key))
                 {
                     Attachment attachment = new Attachment(att.Key);
                     attachment.Name = att.Value;
@@ -139,7 +138,7 @@ namespace Utils.Email
             }
             else
             {
-                mm.From = new MailAddress(Constants.EmailsFrom);
+                mm.From = new MailAddress(Constants.Constants.EmailsFrom);
             }
 
             if (priority != null) mm.Priority = priority;
@@ -149,8 +148,8 @@ namespace Utils.Email
 
             template.Replace("@SUBJECT@", subject);
             template.Replace("@BODY@", body.ToString());
-            template.Replace("@DOMAIN@", Constants.DomainName);
-            template.Replace("@IMAGEPATH_HEADER@", Constants.DomainName.TrimEnd('/') + Constants.EmailImagePath + "header.jpg");
+            template.Replace("@DOMAIN@", Constants.Constants.DomainName);
+            template.Replace("@IMAGEPATH_HEADER@", Constants.Constants.DomainName.TrimEnd('/') + "header.jpg");
             template.Replace("@HEADER_LINE@", subject);
 
             mm.Body = template.ToString();
@@ -171,7 +170,7 @@ namespace Utils.Email
                 }
                 catch (Exception ex)
                 {
-                    Utils.Error.ErrorLog.AddEntry(ex);
+                    //Utils.Error.ErrorLog.AddEntry(ex);
                 }
             }
             return false;
@@ -180,18 +179,18 @@ namespace Utils.Email
         public static bool SendNoneTemplateEmail(string email, string subject, MailAddressCollection mailTo,
             MailAddressCollection mailCc, MailAddressCollection mailBcc, Dictionary<string, string> attachments)
         {
-            return SendNoneTemplateEmail(email, subject, mailTo, mailCc, mailBcc, attachments, Constants.EmailsFrom);
+            return SendNoneTemplateEmail(email, subject, mailTo, mailCc, mailBcc, attachments, Constants.Constants.EmailsFrom);
         }
         public static bool SendNoneTemplateEmail(string email, string subject, MailAddressCollection mailTo,
             MailAddressCollection mailCc, MailAddressCollection mailBcc, Dictionary<string, string> attachments, string emailFrom)
         {
             MailMessage mm = new MailMessage();
-            if (Constants.IsRedirectAllMailToDev)
+            if (Constants.Constants.RedirectAllMailToDev)
             {
                 mm.To.Clear();
                 mm.CC.Clear();
                 mm.Bcc.Clear();
-                mm.To.Add(Constants.DeveloperEmail);
+                mm.To.Add(Constants.Constants.DeveloperEmail);
             }
             else
             {
@@ -209,15 +208,12 @@ namespace Utils.Email
                 {
                     mm.Bcc.Add(item);
                 }
-                if (Constants.SendEmailsToDev)
-                {
-                    mm.Bcc.Add(Constants.DeveloperEmail);
-                }
+
             }
 
             foreach (KeyValuePair<string, string> att in attachments)
             {
-                if (Files.Files.IsFileExist(att.Key))
+                if (File.Exists(att.Key))
                 {
                     Attachment attachment = new Attachment(att.Key);
                     attachment.Name = att.Value;
@@ -231,13 +227,13 @@ namespace Utils.Email
             }
             else
             {
-                mm.From = new MailAddress(Constants.EmailsFrom);
+                mm.From = new MailAddress(Constants.Constants.EmailsFrom);
             }
 
             mm.Subject = subject;
             mm.IsBodyHtml = true;
 
-            mm.Body = email.Replace("@DOMAIN@", Constants.DomainName);
+            mm.Body = email.Replace("@DOMAIN@", Constants.Constants.DomainName);
 
             SmtpClient smtp = new SmtpClient();
             LogEmail(email, subject, mailTo, mailCc, mailBcc);
@@ -257,7 +253,7 @@ namespace Utils.Email
                 }
                 catch (Exception ex)
                 {
-                    Utils.Error.ErrorLog.AddEntry(ex);
+                    //Utils.Error.ErrorLog.AddEntry(ex);
                 }
             }
             return false;
@@ -270,8 +266,7 @@ namespace Utils.Email
             // create html file //
             try
             {
-                Utils.Files.Files.CheckDirectory(Constants.EmailLogPath);
-                string filePath = File.Files.MapPath(Constants.EmailLogPath + timeStamp + ".html");
+                string filePath = Files.Files.MapPath(Constants.Constants.EmailLogPath + timeStamp + ".html");
 
                 FileStream fs = File.Open(filePath, FileMode.CreateNew, FileAccess.Write);
 
@@ -290,7 +285,7 @@ namespace Utils.Email
 
                 // amend email log //
 
-                string logFilePath = Files.Files.MapPath(Constants.EmailLogPath + "email-log.txt");
+                string logFilePath = Files.Files.MapPath(Constants.Constants.EmailLogPath + "email-log.txt");
 
                 fs = File.Open(logFilePath, FileMode.Append, FileAccess.Write);
 

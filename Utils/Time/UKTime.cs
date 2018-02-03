@@ -26,15 +26,6 @@ namespace Utils.Time
             return dt.AddDays(-1 * diff).Date;
         }
 
-        public static DateTime FromJavascriptDate(this DateTime dt, string dateString)
-        {
-            return DateTime.ParseExact(dateString, new string[] { Constants.DateFormatJavascript, Constants.ShortDateFormatJavascript }, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
-        }
-
-        public static string ToJavascriptString(this DateTime dt)
-        {
-            return dt.ToString(Constants.DateFormatJavascript);
-        }
     }
 
     public class UKTime

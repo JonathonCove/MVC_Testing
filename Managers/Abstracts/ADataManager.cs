@@ -21,7 +21,7 @@ namespace DataManager.Abstracts
         { return GetAllData().FirstOrDefault(a => a.ID.Equals(id)); }
 
         public IQueryable<T> GetAllData()
-        { return db.GetTable<T>(); }
+        { return db.Set<T>(); }
 
         #region Dispose
         ~ADataManager()

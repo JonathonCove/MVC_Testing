@@ -8,33 +8,10 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Looks like you're using @Request.Browser.Browser <!--This thinks edge is chrome. --></h2>
-    </div>
-
-    <div class="col-md-8">
-        @{List<decimal> amounts = new List<decimal>() { 100, 12, -4, 124.44M };}
-
-        <ul>
-            @foreach (decimal d in amounts) {
-                <li>
-                    @formatAmount(d)
-                </li>
-            }
-        </ul>
-
-        @helper formatAmount(decimal d) {
-        string color = d < 0 ? "red" : "green";
-            <span style="color:@color">£@d.ToString("N2")</span>
-        }
-    </div>
-
-
-    <div class="col-md-4">
-        <a href="@Url.Action("Details", "CheckingAccount")" class="btn btn-primary btn-large btn-block">View Checking account</a>
+    <div class="col-md-12">
+        <h2>Hello there @Request.Browser.Browser <!--This thinks edge is chrome. --> boy</h2>
     </div>
 
   
-
 </div>
 

@@ -30,7 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web" />
@@ -46,8 +55,12 @@
     <Compile Include="Auth\Auth.cs" />
     <Compile Include="Auth\AuthUser.cs" />
     <Compile Include="Auth\AuthAdmin.cs" />
+    <Compile Include="Context\MainDataContext.cs" />
+    <Compile Include="Context\MainDataContextInitializer.cs" />
     <Compile Include="Interfaces\IModel.cs" />
     <Compile Include="Interfaces\ITemporal.cs" />
+    <Compile Include="Managers\EmailManager.cs" />
+    <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\AuthSession.cs" />
     <Compile Include="Models\User.cs" />
@@ -61,6 +74,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

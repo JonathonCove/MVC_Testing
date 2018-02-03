@@ -63,5 +63,23 @@ namespace Constants
                     "constantsConfigGroup/constantsConfig")).RedirectAllMailToDev;
             }
         }
+
+        public static string EmailLogPath
+        {
+            get
+            {
+                return ((ConstantsConfig)System.Configuration.ConfigurationManager.GetSection(
+                    "constantsConfigGroup/constantsConfig")).EmailLogPath;
+            }
+        }
+
+        public static string EmailTemplatePath
+        {
+            get
+            {
+                return ((ConstantsConfig)System.Configuration.ConfigurationManager.GetSection(
+                    "constantsConfigGroup/constantsConfig")).EmailTemplatePath;
+            }
+        }
     }
 }

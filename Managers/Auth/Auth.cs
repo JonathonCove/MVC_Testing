@@ -5,6 +5,8 @@ using System.Web;
 using Utils.Time;
 using System.Security.Cryptography;
 using Managers.Models;
+using Managers.Context;
+using Utils.Web;
 
 namespace DataManager.Auth
 {
@@ -12,7 +14,7 @@ namespace DataManager.Auth
     {
         protected string CookieID = "LoginCookieAuth";
 
-        protected MainDataContext db;
+        protected MainDataContext db = new MainDataContext();
 
         public enum CookieAuthTypes : byte
         {
@@ -43,7 +45,7 @@ namespace DataManager.Auth
             AuthSession session = new AuthSession
             {
                 IPAddress = HttpContext.Current.Request.GetUserIPAddress(),
-                Created = DateTime.UtcNow,
+                Created = UKTime.Now,
                 SessionCode = Guid.NewGuid().ToString(),
                 CookieID = CookieID
             };
@@ -58,8 +60,8 @@ namespace DataManager.Auth
             }
 
 
-            db.AuthSessions.InsertOnSubmit(session);
-            db.SubmitChanges();
+            db.AuthSessions.Add(session);
+            db.SaveChanges();
 
             HttpCookie cookie = new HttpCookie(CookieID);
 

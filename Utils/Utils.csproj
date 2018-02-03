@@ -46,6 +46,7 @@
     <Compile Include="Encryption\MCrypt.cs" />
     <Compile Include="Encryption\PasswordHash.cs" />
     <Compile Include="Exporting\CSVExport.cs" />
+    <Compile Include="Files\Files.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Time\UKTime.cs" />
     <Compile Include="Web\HttpRequest.cs" />

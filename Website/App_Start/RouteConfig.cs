@@ -12,6 +12,10 @@ namespace Scarecrow
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //User
+            routes.MapRoute(null, "signup", new { controller="User", action="Signup" });
+            routes.MapRoute(null, "login", new { controller="User", action="Login" });
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
